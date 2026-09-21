@@ -1,0 +1,272 @@
+:root {
+  --bg: #010101;
+  --gold-1: #fff1b0;
+  --gold-2: #f7d86f;
+  --gold-3: #dca528;
+  --gold-4: #ffca5c;
+  --white: #f3efe7;
+  --green: #99d97c;
+  --green-dark: #2e5a2a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  overflow: hidden;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.scene {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, rgba(255, 193, 88, 0.12), transparent 24%),
+    radial-gradient(circle at center, rgba(255, 175, 40, 0.08), transparent 42%),
+    #010101;
+}
+
+.scene.ready .orbital-ring,
+.scene.ready .planet,
+.scene.ready .center-caption,
+.scene.ready .name-watermark,
+.scene.ready #flowers,
+.scene.ready #messages,
+.scene.ready .grain {
+  opacity: 1;
+}
+
+.bg-glow {
+  position: absolute;
+  inset: 8% 9% 12% 9%;
+  background: radial-gradient(circle at center, rgba(255, 191, 75, 0.18), rgba(255, 160, 23, 0.08) 35%, rgba(0,0,0,0) 68%);
+  filter: blur(30px);
+  animation: pulseGlow 8s ease-in-out infinite alternate;
+}
+
+.orbital-ring {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  width: min(68vw, 780px);
+  height: min(25vw, 260px);
+  transform: translate(-50%, -50%) rotate(-8deg);
+  border-radius: 50%;
+  background: linear-gradient(90deg, rgba(255, 225, 153, 0.22), rgba(255, 237, 165, 0.9), rgba(255, 195, 78, 0.18));
+  box-shadow:
+    0 0 28px rgba(255, 194, 79, 0.7),
+    0 0 80px rgba(255, 170, 40, 0.22),
+    inset 0 0 42px rgba(255, 240, 187, 0.95),
+    inset 0 0 90px rgba(255, 166, 44, 0.35);
+  animation: orbitSlow 18s linear infinite;
+  opacity: 0;
+}
+
+.orbital-ring::before {
+  content: "";
+  position: absolute;
+  inset: 14% 18%;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  filter: blur(12px);
+}
+
+.orbital-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(255, 195, 87, 0.8);
+}
+
+.planet {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(110px, 11vw, 160px);
+  height: clamp(110px, 11vw, 160px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, rgba(255,255,255,0.18), rgba(88, 88, 88, 0.9) 38%, rgba(0,0,0,1) 82%);
+  box-shadow:
+    inset -8px -8px 20px rgba(0,0,0,0.7),
+    inset 10px 10px 16px rgba(255,255,255,0.06),
+    0 0 30px rgba(0,0,0,0.65);
+  opacity: 0;
+}
+
+.center-caption {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 249, 232, 0.8);
+  font-size: clamp(18px, 2vw, 34px);
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 210, 91, 0.45), 0 0 22px rgba(255, 180, 45, 0.3);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  z-index: 2;
+  animation: textPulse 5s ease-in-out infinite alternate;
+  opacity: 0;
+}
+
+.name-watermark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(90px, 12vw, 220px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 222, 118, 0.1);
+  text-shadow: 0 0 20px rgba(255, 209, 94, 0.18);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  white-space: nowrap;
+  animation: nameFade 8s ease-in-out infinite alternate;
+  opacity: 0;
+}
+
+#flowers,
+#messages {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.flower,
+.float-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  user-select: none;
+  pointer-events: none;
+}
+
+.flower {
+  display: grid;
+  place-items: center;
+  font-size: clamp(22px, 2.6vw, 52px);
+  filter: drop-shadow(0 0 10px rgba(255, 212, 91, 0.7));
+  animation: drift 11s ease-in-out infinite alternate;
+}
+
+.float-text {
+  color: rgba(255, 248, 230, 0.82);
+  font-size: clamp(10px, 1vw, 22px);
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 8px rgba(255, 213, 89, 0.5), 0 0 18px rgba(255, 213, 89, 0.32);
+  opacity: 0.9;
+  animation: textFloat 12s ease-in-out infinite alternate;
+  white-space: nowrap;
+}
+
+.float-text.gold {
+  color: rgba(255, 220, 120, 0.95);
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.14) 0.7px, transparent 0.7px);
+  background-size: 8px 8px;
+  opacity: 0.08;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.start-overlay {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(2px);
+  color: #f6eec6;
+  font-size: clamp(22px, 2.5vw, 36px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 10;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.start-overlay span {
+  display: inline-block;
+  padding: 18px 34px;
+  border: 1px solid rgba(255, 214, 99, 0.6);
+  border-radius: 999px;
+  box-shadow: 0 0 18px rgba(255, 209, 94, 0.25);
+  background: rgba(255, 224, 130, 0.06);
+}
+
+.scene.ready .start-overlay {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@keyframes orbitSlow {
+  0% { transform: translate(-50%, -50%) rotate(-8deg) scale(1); }
+  50% { transform: translate(-50%, -50%) rotate(4deg) scale(1.04); }
+  100% { transform: translate(-50%, -50%) rotate(-8deg) scale(1); }
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(0.95); opacity: 0.72; }
+  100% { transform: scale(1.06); opacity: 1; }
+}
+
+@keyframes drift {
+  0% { transform: translate3d(0, 0, 0) rotate(-2deg) scale(0.96); }
+  100% { transform: translate3d(10px, -14px, 0) rotate(5deg) scale(1.08); }
+}
+
+@keyframes textFloat {
+  0% { transform: translate3d(0, 0, 0) rotate(-1deg); opacity: 0.68; }
+  50% { transform: translate3d(8px, -12px, 0) rotate(1deg); opacity: 1; }
+  100% { transform: translate3d(-10px, 14px, 0) rotate(-1deg); opacity: 0.82; }
+}
+
+@keyframes textPulse {
+  0% { opacity: 0.75; transform: translate(-50%, -50%) scale(0.98); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1.02); }
+}
+
+@keyframes nameFade {
+  0% { opacity: 0.12; transform: translate(-50%, -50%) scale(0.98); }
+  100% { opacity: 0.2; transform: translate(-50%, -50%) scale(1.03); }
+}
+
+@media (max-width: 700px) {
+  .orbital-ring {
+    width: 85vw;
+    height: 30vw;
+    top: 52%;
+  }
+
+  .center-caption {
+    top: 53%;
+    font-size: clamp(16px, 4vw, 24px);
+  }
+
+  .float-text {
+    font-size: clamp(8px, 2.7vw, 16px);
+  }
+}

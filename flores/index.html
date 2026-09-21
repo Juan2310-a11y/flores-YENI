@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flores</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="scene" id="scene">
+      <div class="bg-glow"></div>
+      <div class="orbital-ring"></div>
+      <div class="planet"></div>
+      <div class="name-watermark">Yeni</div>
+      <div class="center-caption">Hoy celebro tenerte cerca</div>
+      <div id="flowers"></div>
+      <div id="messages"></div>
+      <div class="grain"></div>
+
+      <button class="start-overlay" id="startOverlay" aria-label="Hola Yeni, toca para iniciar">
+        <span>Hola Yeni, toca para iniciar</span>
+      </button>
+
+      <audio id="bgMusic" loop preload="auto" style="display:none;">
+        <source src="music/aprender-a-quererte.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
